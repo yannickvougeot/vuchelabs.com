@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VUCHE Labs — Intelligence en réseau.</title>
+  <meta name="description" content="VUCHE Labs builds open-source orchestration platforms for multi-agent AI teams. Self-hosted, BYOK, JARVIS-inspired command center.">
+  <meta property="og:title" content="VUCHE Labs — Intelligence en réseau.">
+  <meta property="og:description" content="Orchestrez vos agents IA. Pas à pas, ou à l'échelle.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vuchelabs.com">
+  <meta name="theme-color" content="#0A0E17">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0A0E17;
+      color: #E8EDF5;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    ::selection { background: rgba(0, 240, 255, 0.25); color: #fff; }
+    a { color: #00F0FF; text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.75; }
+
+    /* ── backdrop ── */
+    #bg-canvas {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+    }
+    .content { position: relative; z-index: 1; }
+
+    /* ── nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(10,14,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,240,255,0.08);
+    }
+    nav .logo {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    nav .logo-hex {
+      width: 32px; height: 32px;
+      background: rgba(0,240,255,0.12);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: #00F0FF; font-weight: 700;
+    }
+    nav .logo-text {
+      font-size: 1.1rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      color: #E8EDF5; line-height: 1;
+    }
+    nav .logo-text small {
+      display: block; font-family: 'Inter', sans-serif;
+      font-size: 0.55rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(232,237,245,0.5);
+    }
+    nav .nav-links { display: flex; gap: 2rem; list-style: none; }
+    nav .nav-links a {
+      font-size: 0.85rem; font-weight: 400; color: rgba(232,237,245,0.6);
+      letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    nav .nav-links a:hover { color: #00F0FF; opacity: 1; }
+
+    /* ── sections ── */
+    section {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding: 6rem 2.5rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    section + section { border-top: 1px solid rgba(0,240,255,0.06); }
+
+    .label {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #00F0FF; margin-bottom: 1rem;
+    }
+
+    /* ── hero ── */
+    #hero { min-height: 100vh; justify-content: center; padding-top: 8rem; }
+    #hero .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.35rem 1rem; margin-bottom: 2rem;
+      border: 1px solid rgba(0,240,255,0.2); border-radius: 100px;
+      font-size: 0.75rem; color: rgba(232,237,245,0.6);
+      background: rgba(0,240,255,0.04);
+      width: fit-content;
+    }
+    #hero .hero-badge span { color: #00F0FF; }
+    #hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 600; line-height: 1.08; letter-spacing: -0.02em;
+      max-width: 14ch; margin-bottom: 1.5rem;
+    }
+    #hero h1 .accent { color: #00F0FF; }
+    #hero p {
+      font-size: 1.15rem; color: rgba(232,237,245,0.55);
+      max-width: 55ch; margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; transition: all 0.25s;
+      border: none;
+    }
+    .btn-primary {
+      background: #00F0FF; color: #0A0E17;
+    }
+    .btn-primary:hover { background: #00d4e0; opacity: 1; }
+    .btn-secondary {
+      background: transparent; color: #E8EDF5;
+      border: 1px solid rgba(232,237,245,0.15);
+    }
+    .btn-secondary:hover { border-color: #00F0FF; color: #00F0FF; opacity: 1; }
+
+    /* ── manifesto ── */
+    #manifesto blockquote {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 500; line-height: 1.3;
+      color: rgba(232,237,245,0.9);
+      border-left: 3px solid #00F0FF;
+      padding-left: 2rem; margin: 2rem 0;
+    }
+    #manifesto .manifesto-text {
+      columns: 2 320px; column-gap: 3rem;
+    }
+    #manifesto .manifesto-text p {
+      font-size: 0.95rem; color: rgba(232,237,245,0.6);
+      margin-bottom: 1.2rem; break-inside: avoid;
+    }
+
+    /* ── pillars ── */
+    .pillars-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .pillar-card {
+      padding: 2rem; border-radius: 12px;
+      background: rgba(0,240,255,0.03);
+      border: 1px solid rgba(0,240,255,0.08);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .pillar-card:hover {
+      border-color: rgba(0,240,255,0.2);
+      background: rgba(0,240,255,0.06);
+    }
+    .pillar-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .pillar-card h3 .icon { color: #00F0FF; }
+    .pillar-card p { font-size: 0.85rem; color: rgba(232,237,245,0.55); line-height: 1.5; }
+
+    /* ── stats ── */
+    #stats { min-height: auto; padding: 4rem 2.5rem; }
+    .stats-row {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      justify-content: center; text-align: center;
+    }
+    .stat-item .stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem; font-weight: 600; color: #00F0FF;
+    }
+    .stat-item .stat-label {
+      font-size: 0.8rem; color: rgba(232,237,245,0.4);
+      letter-spacing: 0.04em; text-transform: uppercase; margin-top: 0.25rem;
+    }
+
+    /* ── contact ── */
+    #contact { min-height: auto; padding: 4rem 2.5rem; text-align: center; align-items: center; }
+    #contact h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600; margin-bottom: 0.75rem;
+    }
+    #contact p { color: rgba(232,237,245,0.5); max-width: 40ch; margin-bottom: 2rem; }
+
+    /* ── footer ── */
+    footer {
+      text-align: center; padding: 2rem 2.5rem;
+      border-top: 1px solid rgba(0,240,255,0.06);
+      font-size: 0.75rem; color: rgba(232,237,245,0.25);
+    }
+
+    /* ── responsive ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      nav .nav-links { display: none; }
+      section { padding: 5rem 1.25rem; }
+      #manifesto .manifesto-text { columns: 1; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    /* ── ambient particles ── */
+    .particle {
+      position: fixed; width: 2px; height: 2px;
+      background: rgba(0,240,255,0.3); border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+  </style>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-hex.svg">
+  <link rel="apple-touch-icon" href="assets/logo-icon-white.svg">
+  <!-- Plausible Analytics (privacy-friendly) -->
+  <script defer data-domain="vuchelabs.com" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <div class="logo">
+    <div class="logo-hex">V</div>
+    <div class="logo-text">
+      VUCHE <small>Labs</small>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#manifesto">Manifeste</a></li>
+    <li><a href="#pillars">Piliers</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="content">
+
+<section id="hero">
+  <div class="hero-badge">
+    <span>●</span> Open-source · Self-hosted · BYOK
+  </div>
+  <h1>
+    Intelligence<br>
+    <span class="accent">en réseau.</span>
+  </h1>
+  <p>
+    Orchestrez vos agents IA. Pas à pas, ou à l'échelle.<br>
+    VUCHE Labs builds the open-source infrastructure for multi-agent AI companies.
+  </p>
+  <div class="btn-group">
+    <a href="#manifesto" class="btn btn-primary">Lire le manifeste →</a>
+    <a href="#contact" class="btn btn-secondary">Nous contacter</a>
+  </div>
+</section>
+
+<section id="manifesto">
+  <div class="label">// Manifeste</div>
+  <blockquote>
+    “ L'agent IA unique est un outil. 
+    L'agent orchestré est une équipe. ”
+  </blockquote>
+  <div class="manifesto-text">
+    <p>
+      Nous croyons que l'avenir de l'IA n'est pas dans des modèles toujours plus gros,
+      mais dans <strong>l'orchestration intelligente</strong> de multiples agents spécialisés.
+      Un CEO, une stack, cent agents — chaque département de votre entreprise piloté
+      par une IA autonome, coordonnée, traçable.
+    </p>
+    <p>
+      <strong>Transparence radicale.</strong> Pas de boîte noire, pas de vendor lock-in.
+      Notre cœur est open-source. Vos clés, vos données, votre infrastructure.
+      Vous apportez vos modèles, nous apportons la colonne vertébrale.
+    </p>
+    <p>
+      <strong>Précision chirurgicale.</strong> Chaque interaction est conçue, mesurée,
+      optimisée. Nous ne construisons pas des prototypes — nous construisons des
+      systèmes qui tiennent la charge en production.
+    </p>
+    <p>
+      <strong>Esthétique JARVIS.</strong> Parce que les outils les plus puissants
+      méritent les interfaces les plus élégantes. Verre, cyan, profondeur —
+      votre centre de commandement, partout où vous êtes.
+    </p>
+    <p>
+      Nous sommes VUCHE Labs. Français, ouverts, techniques.
+      Et nous ne faisons que commencer.
+    </p>
+  </div>
+</section>
+
+<section id="pillars">
+  <div class="label">// Piliers</div>
+  <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:600;margin-bottom:0.5rem;">
+    Quatre piliers
+  </h2>
+  <p style="color:rgba(232,237,245,0.5);max-width:50ch;margin-bottom:1rem;">
+    Chaque décision produit, chaque ligne de code, chaque pixel s'aligne sur ces principes.
+  </p>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <h3><span class="icon">◇</span> Orchestration</h3>
+      <p>Multi-agent AI workflow coordination. Pas des outils isolés — des équipes entières, communiquant, déléguant, livrant.</p>
+    </div>
+    <div class="pillar-card">
+      <h3><span class="icon">◈</span> Transparence</h3>
+      <p>Open-source core, BYOK, self-hosted. Aucun vendor lock-in, aucune boîte noire. Votre infrastructure, vos règles.</p>
+    </div>
+    <div class="pillar-card">
+      <h3><span class="icon">◇</span> Précision</h3>
+      <p>Chaque interaction est engineerée. Tactique, chirurgicale, délibérée. Pas de fluff, que de la valeur.</p>
+    </div>
+    <div class="pillar-card">
+      <h3><span class="icon">◈</span> Élégance</h3>
+      <p>High-design human interface. Esthétique JARVIS, verre, profondeur. Le centre de commandement que vos agents méritent.</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Open-source</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">∞</div>
+      <div class="stat-label">BYOK — Vos modèles</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Autonome en production</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Construisons ensemble.</h2>
+  <p>
+    Vous êtes un fondateur solo, une équipe R&D, ou un investisseur ?
+    Parlons orchestration multi-agents.
+  </p>
+  <div class="btn-group" style="justify-content:center;">
+    <a href="mailto:hello@vuchelabs.com" class="btn btn-primary">hello@vuchelabs.com</a>
+    <a href="https://x.com/vuchelabs" target="_blank" rel="noopener" class="btn btn-secondary">@vuchelabs</a>
+  </div>
+</section>
+
+<footer>
+  VUCHE Labs — Intelligence en réseau. © 2026
+</footer>
+
+</div>
+
+<script>
+  // ── Canvas hex grid animation ──
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const hexR = 30;
+  const h = hexR * Math.sqrt(3);
+  const cols = Math.ceil(canvas.width / (hexR * 1.5)) + 2;
+  const rows = Math.ceil(canvas.height / h) + 2;
+
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const time = Date.now() / 4000;
+
+    for (let col = 0; col < cols; col++) {
+      for (let row = 0; row < rows; row++) {
+        const x = col * hexR * 1.5 + hexR;
+        const y = row * h + (col % 2 === 0 ? h / 2 : 0);
+        const dx = x - mouseX;
+        const dy = y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const pulse = 0.3 + 0.15 * Math.sin(time + col * 0.8 + row * 0.6);
+        const near = Math.max(0, 1 - dist / 400);
+        const alpha = Math.min(0.12, pulse * 0.12 + near * 0.25);
+
+        ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
+        ctx.lineWidth = 0.6;
+
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const angle = Math.PI / 3 * i - Math.PI / 6;
+          const px = x + hexR * Math.cos(angle);
+          const py = y + hexR * Math.sin(angle);
+          i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.stroke();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // ── Ambient particles ──
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (15 + Math.random() * 25) + 's';
+    p.style.animationDelay = (Math.random() * 20) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+    document.body.appendChild(p);
+  }
+</script>
+
+</body>
+</html>
