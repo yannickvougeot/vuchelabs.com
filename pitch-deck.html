@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VUCHE Labs — Pitch Deck</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0A0E17; color: #E8EDF5; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+  .slide { min-height: 100vh; padding: 4rem 6rem; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid rgba(0,240,255,0.1); position: relative; }
+  h1 { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; background: linear-gradient(135deg, #00F0FF 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 600; color: #00F0FF; margin-bottom: 1.5rem; }
+  h3 { font-size: 1.25rem; color: #7C3AED; margin-bottom: 0.75rem; }
+  p, li { font-size: 1.1rem; line-height: 1.7; color: #94A3B8; font-weight: 300; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+  .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0,240,255,0.1); border-radius: 16px; padding: 1.5rem; }
+  .card h3 { color: #00F0FF; }
+  .tag { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 500; margin: 0.25rem; }
+  .tag-cyan { background: rgba(0,240,255,0.1); color: #00F0FF; border: 1px solid rgba(0,240,255,0.2); }
+  .tag-purple { background: rgba(124,58,237,0.1); color: #7C3AED; border: 1px solid rgba(124,58,237,0.2); }
+  .tag-green { background: rgba(16,185,129,0.1); color: #10B981; border: 1px solid rgba(16,185,129,0.2); }
+  .highlight { color: #00F0FF; font-weight: 500; }
+  table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  th { color: #00F0FF; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { color: #94A3B8; }
+  .stat { text-align: center; padding: 1.5rem; }
+  .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 700; color: #00F0FF; }
+  .stat-label { font-size: 0.9rem; color: #64748B; margin-top: 0.25rem; }
+  .nav { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; display: flex; gap: 0.5rem; }
+  .nav a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,240,255,0.1); color: #00F0FF; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(0,240,255,0.2); transition: all 0.2s; }
+  .nav a:hover { background: rgba(0,240,255,0.2); }
+  .slide-num { position: absolute; bottom: 1.5rem; left: 6rem; font-size: 0.8rem; color: #475569; font-family: 'JetBrains Mono', monospace; }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; }
+  ul li::before { content: '▸'; position: absolute; left: 0; color: #00F0FF; }
+  @media print { .slide { page-break-after: always; min-height: 100vh; } .nav { display: none; } }
+  @media (max-width: 768px) { .slide { padding: 2rem; } h1 { font-size: 2rem; } .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="#s1">1</a>
+  <a href="#s2">2</a>
+  <a href="#s3">3</a>
+  <a href="#s4">4</a>
+  <a href="#s5">5</a>
+  <a href="#s6">6</a>
+  <a href="#s7">7</a>
+  <a href="#s8">8</a>
+  <a href="#s9">9</a>
+  <a href="#s10">10</a>
+</div>
+
+<!-- Slide 1: Title -->
+<div class="slide" id="s1">
+  <div style="max-width: 800px;">
+    <p style="color: #00F0FF; font-family: 'Space Grotesk', sans-serif; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;">VUCHE Labs — 2026</p>
+    <h1>Intelligence en réseau.</h1>
+    <p style="font-size: 1.3rem; color: #64748B; margin-bottom: 2rem;">Open-source orchestration platform for multi-agent AI companies.</p>
+    <p style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: #7C3AED;">"Un CEO, une stack, cent agents."</p>
+    <div style="margin-top: 3rem;">
+      <span class="tag tag-cyan">open-source</span>
+      <span class="tag tag-purple">BYOK</span>
+      <span class="tag tag-green">self-hosted</span>
+    </div>
+  </div>
+  <div class="slide-num">01/10</div>
+</div>
+
+<!-- Slide 2: Problem -->
+<div class="slide" id="s2">
+  <h2>Le problème</h2>
+  <p style="max-width: 700px; font-size: 1.2rem; margin-bottom: 2rem;">L'agent IA unique est un outil.<br><span class="highlight">L'agent orchestré est une équipe.</span></p>
+  <div class="grid-3">
+    <div class="card">
+      <h3>🔒 Vendor Lock-in</h3>
+      <p>Les plateformes propriétaires captent vos données et vous empêchent de migrer. Chaque outil est un silo.</p>
+    </div>
+    <div class="card">
+      <h3>💰 Coût × Complexité</h3>
+      <p>Abonnements multiples, APIs coûteuses, intégrations fragiles. Une PME ne peut pas aligner 10 SaaS.</p>
+    </div>
+    <div class="card">
+      <h3>🧩 Pas de coordination</h3>
+      <p>Les outils IA existants ne communiquent pas entre eux. Pas de délégation, pas de mémoire partagée, pas d'orchestration.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3: Solution -->
+<div class="slide" id="s3">
+  <h2>La solution : VUCHE Labs</h2>
+  <p style="max-width: 700px; margin-bottom: 2rem;">Infrastructure open-source pour entreprises d'agents IA. Orchestration multi-agent, BYOK, auto-hébergée.</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3>🤖 Orchestration Multi-Agent</h3>
+      <p>Paperclip gère vos équipes d'agents : CEO, ingénieur, designer, sales, marketing — chaque agent a son rôle et communique via des protocoles standards (MCP, ACP).</p>
+    </div>
+    <div class="card">
+      <h3>🔑 BYOK — Bring Your Own Key</h3>
+      <p>Vos modèles, votre infrastructure. Connectez vos propres clés API (OpenAI, Anthropic, open-source) — zéro dépendance, zéro captivité.</p>
+    </div>
+    <div class="card">
+      <h3>⚡ Interface JARVIS</h3>
+      <p>Hermes — un terminal intelligent, flegmatique et proactif. Pilotez votre entreprise d'agents comme Tony Stark. En ligne de commande ou en mode dashboard.</p>
+    </div>
+    <div class="card">
+      <h3>🏠 Auto-Hébergé</h3>
+      <p>Déploiement sur votre VPS, votre bureau ou le cloud. Pas de données chez un tiers. RGPD natif. Coût : votre facture GPU, rien de plus.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 4: How It Works -->
+<div class="slide" id="s4">
+  <h2>Comment ça marche</h2>
+  <div class="grid-2">
+    <div>
+      <h3>Architecture</h3>
+      <ul>
+        <li><span class="highlight">Orchestrator</span> — Paperclip CEO : planifie, délègue, vérifie</li>
+        <li><span class="highlight">Spécialistes</span> — Agents Eng, Design, Sales, Mktg, Ops</li>
+        <li><span class="highlight">Protocoles</span> — MCP (outils), ACP (agents), files d'attente</li>
+        <li><span class="highlight">Auto-réparation</span> — Les agents défaillants sont redémarrés</li>
+        <li><span class="highlight">Monitoring</span> — Tableau de bord en temps réel, logs, alertes</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Cycle d'exécution</h3>
+      <ul>
+        <li><span class="highlight">1.</span> Vous donnez un objectif (ex: "lance le bot de trading")</li>
+        <li><span class="highlight">2.</span> L'orchestrateur décompose en tâches</li>
+        <li><span class="highlight">3.</span> Les agents spécialisés exécutent en parallèle</li>
+        <li><span class="highlight">4.</span> Résultats consolidés et présentés</li>
+        <li><span class="highlight">5.</span> Boucle de rétroaction : les agents apprennent</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Différenciateurs -->
+<div class="slide" id="s5">
+  <h2>Pourquoi VUCHE Labs ?</h2>
+  <table>
+    <tr><th>Critère</th><th>VUCHE Labs</th><th>Concurrents</th></tr>
+    <tr><td>Licence</td><td class="highlight">Open-source (AGPL)</td><td>Propriétaire / SaaS</td></tr>
+    <tr><td>Modèles</td><td class="highlight">BYOK — vos clés</td><td>Vendor lock-in</td></tr>
+    <tr><td>Orchestration</td><td class="highlight">Multi-agent orchestré</td><td>Agent unique / chat</td></tr>
+    <tr><td>Déploiement</td><td class="highlight">Auto-hébergé</td><td>Cloud obligatoire</td></tr>
+    <tr><td>Interface</td><td class="highlight">JARVIS-inspired</td><td>UI générique</td></tr>
+    <tr><td>Coût</td><td class="highlight">Votre GPU seulement</td><td>Abonnement par siège</td></tr>
+    <tr><td>Données</td><td class="highlight">100% contrôlées</td><td>Hébergées chez le fournisseur</td></tr>
+  </table>
+</div>
+
+<!-- Slide 6: Traction -->
+<div class="slide" id="s6">
+  <h2>Traction</h2>
+  <div class="grid-3" style="margin-bottom: 2rem;">
+    <div class="card stat">
+      <div class="stat-num">25+</div>
+      <div class="stat-label">Agents en production</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Compagnies d'agents actives</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Pays supportés (calculateurs)</div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>✅ Paperclip</h3>
+      <p>Plateforme d'orchestration multi-agents fonctionnelle. Gestion de projets, files d'attente, monitoring, espace de travail isolé.</p>
+    </div>
+    <div class="card">
+      <h3>✅ Hermes</h3>
+      <p>Agent CLI JARVIS-like avec compétences étendues. Intégration MCP, outils système, déploiement automatisé.</p>
+    </div>
+    <div class="card">
+      <h3>✅ AltFinder</h3>
+      <p>Annuaire SEO de 58 alternatives open-source aux SaaS. 156 pages générées, pipeline GitHub API.</p>
+    </div>
+    <div class="card">
+      <h3>✅ Calculateurs Financiers</h3>
+      <p>10 pays, 4 types de calcul, 51 pages. Données fiscales sourcées, trafic SEO longue traîne.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 7: Business Model -->
+<div class="slide" id="s7">
+  <h2>Modèle économique</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3>🆓 Open-Source Core</h3>
+      <p style="font-size: 0.95rem;">Gratuit, AGPL. Toute la plateforme de base est accessible à tous. Pas de version "hobbie" bridée.</p>
+    </div>
+    <div class="card">
+      <h3>☁️ Hosted Cloud</h3>
+      <p style="font-size: 0.95rem;">SaaS pour adoption rapide. Les équipes qui ne veulent pas gérer l'infrastructure paient un abonnement.</p>
+    </div>
+    <div class="card">
+      <h3>🏢 Enterprise</h3>
+      <p style="font-size: 0.95rem;">SSO, audit trail, support dédié, SLA. Pour les entreprises régulées (finance, santé, défense).</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top: 1.5rem;">
+    <h3>🛒 Marketplace</h3>
+    <p>Skills premium, templates d'agents, intégrations certifiées. Revenue share 70/30 avec les créateurs.</p>
+  </div>
+</div>
+
+<!-- Slide 8: Team -->
+<div class="slide" id="s8">
+  <h2>L'équipe</h2>
+  <div class="card" style="max-width: 600px;">
+    <h3>Yanni (Monsieur)</h3>
+    <p style="margin-bottom: 1rem;">Fondateur — Manager multi-projets IA</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+      <span class="tag tag-cyan">orchestration multi-agent</span>
+      <span class="tag tag-purple">trading algorithmique</span>
+      <span class="tag tag-green">design systems</span>
+    </div>
+    <ul>
+      <li>Fondateur de <span class="highlight">Code Emploi</span> (careeragent-ai)</li>
+      <li>Expert en systèmes multi-agents Paperclip</li>
+      <li>Infrastructure Hermes + Headroom + LLM routing</li>
+      <li>MetaTrader 5 / trading automatisé</li>
+    </ul>
+  </div>
+  <h3 style="margin-top: 2rem;">Équipe d'agents</h3>
+  <p>Alfred (CEO agent), Iris (Scout), Kasper (Finance/Trading), plus 25 agents spécialisés en production.</p>
+</div>
+
+<!-- Slide 9: Roadmap -->
+<div class="slide" id="s9">
+  <h2>Roadmap</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3>Q3 2026 — Foundation</h3>
+      <ul>
+        <li>Site VUCHE Labs launch</li>
+        <li>Paperclip GA (General Availability)</li>
+        <li>Marketplace v1</li>
+        <li>Documentation API</li>
+        <li>Communauté open-source</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Q4 2026 — Growth</h3>
+      <ul>
+        <li>Marketplace skills premium</li>
+        <li>Dashboard analytics</li>
+        <li>Template library (50+ agents)</li>
+        <li>Intégrations tierces</li>
+        <li>Early adopter program</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Q1 2027 — Scale</h3>
+      <ul>
+        <li>Enterprise SSO / SAML</li>
+        <li>Audit trail complet</li>
+        <li>SLA garantis</li>
+        <li>Hosted Cloud beta</li>
+        <li>Seed round deployment</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Ask -->
+<div class="slide" id="s10">
+  <h2>L'opportunité</h2>
+  <div class="grid-2">
+    <div>
+      <h3>Seed Round : 500K €</h3>
+      <p style="margin-bottom: 1.5rem;">12 mois de runway pour atteindre le product-market fit et 100 clients pilotes.</p>
+      <div style="margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span>R&D</span><span class="highlight">40% — 200K</span></div>
+        <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 1rem;"><div style="width: 40%; height: 100%; background: linear-gradient(90deg, #00F0FF, #7C3AED); border-radius: 2px;"></div></div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span>Infrastructure</span><span class="highlight">30% — 150K</span></div>
+        <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 1rem;"><div style="width: 30%; height: 100%; background: linear-gradient(90deg, #7C3AED, #00F0FF); border-radius: 2px;"></div></div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span>Marketing</span><span class="highlight">20% — 100K</span></div>
+        <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 1rem;"><div style="width: 20%; height: 100%; background: linear-gradient(90deg, #00F0FF, #7C3AED); border-radius: 2px;"></div></div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span>Legal & Admin</span><span class="highlight">10% — 50K</span></div>
+        <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px;"><div style="width: 10%; height: 100%; background: linear-gradient(90deg, #7C3AED, #00F0FF); border-radius: 2px;"></div></div>
+      </div>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <div class="card">
+        <p><span class="highlight">Email :</span> hello@vuchelabs.com</p>
+        <p style="margin-top: 0.5rem;"><span class="highlight">Site :</span> vuchelabs.com</p>
+        <p style="margin-top: 0.5rem;"><span class="highlight">GitHub :</span> github.com/yannickvougeot/vuchelabs.com</p>
+        <p style="margin-top: 0.5rem;"><span class="highlight">X :</span> @vuchelabs</p>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #475569;">"L'IA ne remplace pas les équipes.<br>Elle <span class="highlight">devient</span> l'équipe."</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">10/10</div>
+</div>
+
+</body>
+</html>
